@@ -1,0 +1,45 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+	<header id="header" class="header-transparent" data-plugin-options="{'stickyEnabled': true, 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': false, 'stickyChangeLogo': false, 'stickyStartAt': 1, 'stickyHeaderContainerHeight': 70}">
+				<div class="header-body header-border-bottom overflow-visible">
+					<div class="header-container container w-100">
+						<div class="header-row py-1">
+							<div class="header-column flex-row w-auto">
+								<div class="header-logo">
+								<img style="height:100px; width: 175px" src="#{resource['template:img/buk_logo.png']}"/>
+								</div>
+							</div>
+							<div class="header-column w-100 ps-lg-5">
+								<div class="header-nav w-100 p-0">
+									<div class="header-nav header-nav-line header-nav-bottom-line header-nav-bottom-line-effect-1 justify-content-start w-100">
+										<div class="header-nav-main header-nav-main-arrows header-nav-main-effect-2 header-nav-main-sub-effect-1 w-100">
+											<nav class="collapse w-100">
+												<ul class="nav nav-pills flex-column flex-lg-row w-100" id="mainNav">
+													<li class="dropdown">
+														<a class="dropdown-item active" data-hash-offset="70" href="#content">Start</a>
+													</li>
+													<li class="dropdown">
+														<a class="dropdown-item" data-hash-offset="70" href="#about">O projekcie</a>
+													</li>
+													<li class="dropdown" style="margin-left:auto">
+														<h:commandLink class="dropdown-item" data-hash-offset="70" value="Zaloguj się" action="login.jsf" />
+													</li>
+													
+												</ul>
+											</nav>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</header>
+	
+	
+</ui:composition>
