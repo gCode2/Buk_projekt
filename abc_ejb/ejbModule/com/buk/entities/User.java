@@ -21,6 +21,8 @@ public class User implements Serializable {
 	private String email;
 
 	private String name;
+	
+	private String password;
 
 	private String surname;
 
@@ -61,6 +63,14 @@ public class User implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getPassword() {
+		return this.password;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getSurname() {
