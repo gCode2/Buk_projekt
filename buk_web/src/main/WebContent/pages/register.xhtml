@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/page-template.xhtml">
+	<ui:define name="content">
+		<div class="main loginCont">
+		<div class="row justify-content-md-center registerHolder">
+								<div class="col-md-9">
+									<div class="featured-box featured-box-primary text-start mt-0">
+										<div class="box-content registerForm">
+											<h4 class="color-primary font-weight-semibold text-4 text-uppercase mb-3" style="color:#07112A">Zarejestruj konto</h4>
+											<h:form id="frmSignUp" method="post" className="needs-validation" novalidate="novalidate">
+											<div class="row">
+													<div class="form-group col">
+														<label class="form-label">Imię</label>
+														<h:inputText id="name" value="#{registerBB.name}" class="form-control form-control-lg" required="true" requiredMessage="Podaj imię!"/>
+														<p:messages for="name" showDetail="true" autoUpdate="true" showSummary="false"/>
+													</div>
+												</div>
+											<div class="row">
+													<div class="form-group col">
+														<label class="form-label">Nazwisko</label>
+														<h:inputText id="surname" value="#{registerBB.surname}" class="form-control form-control-lg" required="true" requiredMessage="Podaj nazwisko!"/>
+														<p:messages for="surname" showDetail="true" autoUpdate="true" showSummary="false"/>
+													</div>
+												</div>
+											
+												<div class="row">
+													<div class="form-group col">
+														<label class="form-label">E-mail</label>
+														<h:inputText id="email" value="#{registerBB.email}" class="form-control form-control-lg" required="true" requiredMessage="Podaj email!" validatorMessage="Niepoprawny email!">
+															<f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+														</h:inputText>
+														<p:messages for="email" showDetail="true" autoUpdate="true" showSummary="false"/>
+													</div>
+												</div>
+												
+												<div class="row">
+													<div class="form-group col-lg-6">
+														<label class="form-label">Hasło</label>
+														<h:inputSecret id="password" value="#{registerBB.pass}" class="form-control form-control-lg" required="true" requiredMessage="Wpisz hasło!"/>
+														<p:messages for="password" showDetail="true" autoUpdate="true" showSummary="false"/>
+													</div>
+													<div class="form-group col-lg-6">
+														<label class="form-label">Powtórz hasło</label>
+														<h:inputSecret id="password2" value="#{registerBB.passq}" class="form-control form-control-lg" required="true" requiredMessage="Potwierdz hasło!"/>
+														<p:messages for="password2" showDetail="true" autoUpdate="true" showSummary="false"/>
+													</div>
+												</div>
+												
+												<div class="row">
+													<div class="form-group col-lg-9">
+														
+													</div>
+													<div class="form-group col-lg-3">
+														<h:commandButton action="#{registerBB.doRegister()}" value="Register" styleClass="btn btn-modern float-end" style="background-color:#07112A;color:#fff;" />
+													</div>
+												</div>
+											</h:form>
+											<h:form>
+												<p:commandLink value="(Masz już konto? Zaloguj się!)" action="/pages/login?faces-redirect=true" />
+											</h:form>
+										</div>
+									</div>
+								</div>
+							</div>
+	</div>
+			
+	</ui:define>
+</ui:composition>
+</html>

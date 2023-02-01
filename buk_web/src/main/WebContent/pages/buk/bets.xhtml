@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/app-page-template.xhtml">
+	<ui:define name="content">
+	
+		<div class="main mainCont">
+			<div class="row justify-content-md-center appHolder">
+			
+				<div class="col-md-10">
+					<h:form id="receiveMoneyForm" method="post">
+					<ui:repeat value="#{sessionScope.bets}" var="bet" varStatus="status">
+						<div class="#{bet.status == 'W TRAKCIE' ? 'in-progress' : (bet.status == 'WYGRANA' ? 'won' : 'lost')}">
+						<p:panel id="toggleable#{status.index}" header="Kupon #{status.index + 1} | Kurs: #{bet.rate} | Wydatek: #{bet.contribution} | Do wygrania: #{bet.value} | Status: #{bet.status}" toggleable="true" collapsed="true" toggleSpeed="500" closeSpeed="500" widgetVar="panel#{status.index}" style="margin-bottom:20px">
+         					<h:panelGrid cellpadding="10">
+         					<table class="matchBetListTable">
+         					<tr>
+         					<th style="width:30%"></th>
+         					<th style="width:20%">Mecz</th>
+         					<th style="width:30%"></th>
+         					<th>Wybór</th>
+         					<th>Kurs</th>
+         					<th>Status</th>
+         					</tr>
+         					
+         					<ui:repeat value="#{sessionScope.betMap.get(bet)}" var="betMapItem">
+         						<tr>
+         							<td>#{betMapItem.event.teama}</td>
+         							<td>#{betMapItem.event.scorea} : #{betMapItem.event.scoreb}</td>
+         							<td>#{betMapItem.event.teamb}</td>
+         							<td>#{betMapItem.choice}</td>
+         							<td>#{betMapItem.rate}</td>
+         							<td>#{betMapItem.status}</td>
+         						</tr>
+    
+  							</ui:repeat>
+  							</table>
+  							
+            				</h:panelGrid>
+            				<div class="receiveMoneyHolder">
+  							<p:commandButton id="betBtn#{status.index}" form="receiveMoneyForm" action="#{betBB.receiveBetValue(remoteClient.details.getId(), bet.value, bet)}" value="#{bet.received ? 'Kupon odebrany!' : (bet.available == false || bet.received==true ? 'Kupon niedostępny' : 'Odbierz kupon!')}" disabled="#{bet.available == false || bet.received == true}"/>
+  							</div>
+    					</p:panel>
+    					</div>
+    				</ui:repeat>
+    				
+			</h:form>
+				</div>
+				
+			</div>
+		</div>
+			
+	</ui:define>
+</ui:composition>
+</html>

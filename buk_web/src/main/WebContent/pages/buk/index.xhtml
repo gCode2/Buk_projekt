@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/app-page-template.xhtml">
+	<ui:define name="content">
+	
+		<div class="main mainCont">
+			<div class="row justify-content-md-center appHolder">
+			
+				<div class="col-md-7">
+				<h:form id="eventListForm" styleClass="betForm">
+					<div class="featured-box featured-box-primary text-start mt-0 appListsHolder">
+						<div class="btn-holder">
+							<h:commandButton value="Wczytaj mecze" action="#{eventBB.fetchData()}">
+       							<f:ajax execute="@form" render="matchTable" />
+   						 	</h:commandButton>
+   						 	</div>
+   						 <h:dataTable id="matchTable" value="#{eventBB.matchList}" var="match" styleClass="matchTable" rowClass="#{match.status == 'FINISHED' ? 'finished' : (match.status == 'POSTPONED' ? 'finished' : (match.status == 'IN_PLAY' ? 'in-progress' : (match.status == 'TIMED' ? 'timed' : 'paused')))}">
+						  <h:column>
+						    <f:facet name="header">Home Team</f:facet>
+						    <h:outputText value="#{match.teama}"/>
+						  </h:column>
+						  <h:column>
+						    <f:facet name="header">Home Team Score</f:facet>
+						    #{match.scorea}
+						  </h:column>
+						  <h:column>
+						    <f:facet name="header">1</f:facet>
+						    <h:commandButton value="#{match.ratea}" disabled="#{match.status == 'FINISHED' ? true : (match.status == 'POSTPONED' ? true : false)}" action="#{betItemBB.addToBet(match.matchID, 'HOME_TEAM', match.ratea, 'W TRAKCIE')}">
+						    	<f:ajax execute="@form" render="betListForm:betItemTable betListForm:totalRateOutput"/>
+						    </h:commandButton>
+						  </h:column>
+						  <h:column>
+						    <f:facet name="header">X</f:facet>
+						    <h:commandButton value="#{match.rate0}" disabled="#{match.status == 'FINISHED' ? true : (match.status == 'POSTPONED' ? true : false)}" action="#{betItemBB.addToBet(match.matchID, 'DRAW', match.rate0, 'W TRAKCIE')}">
+						    	<f:ajax execute="@form" render="betListForm:betItemTable betListForm:totalRateOutput"/>
+						    </h:commandButton>
+						  </h:column>
+						  <h:column>
+						    <f:facet name="header">2</f:facet>
+						    <h:commandButton value="#{match.rateb}" disabled="#{match.status == 'FINISHED' ? true : (match.status == 'POSTPONED' ? true : false)}" action="#{betItemBB.addToBet(match.matchID, 'AWAY_TEAM', match.rateb, 'W TRAKCIE')}">
+							<f:ajax execute="@form" render="betListForm:betItemTable betListForm:totalRateOutput"/>
+							</h:commandButton>
+						  </h:column>
+						  <h:column>
+						    <f:facet name="header">Away Team Score</f:facet>
+						    #{match.scoreb}
+						  </h:column>
+						  <h:column>
+						    <f:facet name="header">Away Team</f:facet>
+						    #{match.teamb}
+						  </h:column>
+						  <h:column>
+						    <f:facet name="header">Status</f:facet>
+						    #{match.status}
+						  </h:column>
+						</h:dataTable>
+					
+						
+					</div>
+					</h:form>
+				</div>
+				<div class="col-md-4">
+				<h:form id="betListForm" styleClass="betForm">
+					<div class="featured-box featured-box-primary text-start mt-0 betWindow">
+						<h2>Twój kupon</h2>
+						<div class="betItemList" id="betItemList">
+							<h:dataTable id="betItemTable" value="#{betItemBB.betItemList}" styleClass="betItemTable" var="betitem">
+								<h:column>
+						   			 <f:facet name="header">A</f:facet>
+						    		#{betitem.event.teama}
+						  		</h:column>
+						  		<h:column>
+						   			 <f:facet name="header">B</f:facet>
+						    		#{betitem.event.teamb}
+						  		</h:column>
+						  		<h:column>
+						   			 <f:facet name="header">Wybór</f:facet>
+						    		#{betitem.choice}
+						  		</h:column>
+						  		<h:column>
+						   			 <f:facet name="header">Kurs</f:facet>
+						    		#{betitem.rate}
+						  		</h:column>
+						  		<h:column>
+						  		<f:facet name="header">Usuń</f:facet>
+						   			 <p:commandButton value="X" actionListener="#{betItemBB.removeFromBet(betitem.event.getId())}" update="@form" process="@this" ajax="true">
+						   			 	<f:ajax execute="@this" update=":betItemTable" render="betListForm:betItemTable betListForm:totalRateOutput"/>
+						   			 </p:commandButton>
+						  		</h:column>
+							</h:dataTable>
+							<div class="betInfo">
+							<h:outputText id="totalRateOutput" value="Całkowity kurs: #{betItemBB.getTotalRate()}"/>
+							<div>
+							<h:outputText value="Ilość BukToken'ów: "/>
+							<h:inputText id="betContribution" value="#{betBB.contribution}" name="betContribution" styleClass="form-control form-control-lg" required="true" requiredMessage="Nie podano stawki!"/>
+							
+							<p:messages for="betContribution" showDetail="true" autoUpdate="true" showSummary="false"/>
+							</div>
+							<div class="btn-holder">
+							<h:commandButton value="Wchodzę w to!" action="#{betBB.placeBet(remoteClient.details, betItemBB.betItemList, betItemBB.totalRate, betBB.contribution, (betItemBB.totalRate * betBB.contribution), null)}"/>
+							</div>
+							</div>
+						</div>
+					</div>
+					</h:form>
+				</div>
+				
+			</div>
+		</div>
+			
+	</ui:define>
+</ui:composition>
+</html>

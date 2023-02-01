@@ -1,0 +1,55 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+	<header id="header" class="header-transparent" data-plugin-options="{'stickyEnabled': true, 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': false, 'stickyChangeLogo': false, 'stickyStartAt': 1, 'stickyHeaderContainerHeight': 70}">
+				<div class="header-body header-border-bottom overflow-visible">
+					<div class="header-container container w-100">
+						<div class="header-row py-1">
+							<div class="header-column flex-row w-auto">
+								<div class="header-logo">
+								<img style="height:100px; width: 175px" src="#{resource['template:img/buk_logo.png']}"/>
+								</div>
+							</div>
+							<div class="header-column w-100 ps-lg-5">
+								<div class="header-nav w-100 p-0">
+									<div class="header-nav header-nav-line header-nav-bottom-line header-nav-bottom-line-effect-1 justify-content-start w-100">
+										<div class="header-nav-main header-nav-main-arrows header-nav-main-effect-2 header-nav-main-sub-effect-1 w-100">
+											<nav class="collapse w-100">
+											<h:form id="appHeaderForm">
+												<ul class="nav nav-pills flex-column flex-lg-row w-100" id="mainNav">
+													
+													<li class="dropdown">
+														<p:commandButton styleClass="dropdown-item active" value="Lista spotkań" action="#{betBB.matchListPage()}" data-hash-offset="70"/>
+													</li>
+													
+													<li class="dropdown">
+														<p:commandButton styleClass="dropdown-item" value="Twoje Zakłady" action="#{betBB.betPage(remoteClient.details)}" data-hash-offset="70"/>
+													</li>
+													<li class="dropdown">
+														<p:commandButton styleClass="dropdown-item" value="Portfel" action="#{walletBB.walletPage(remoteClient.details.getId())}" data-hash-offset="70"/>
+													</li>
+													
+													<li class="dropdown" style="margin-left:auto;display: flex;flex-direction: row;align-items:center;align-content: center;justify-content: center;column-gap:10px;">
+														<span id="bukTokensMini">#{sessionScope.uWallet.amount}</span>
+														<img style="height:40px; width: 40px; margin-right:20px;" src="#{resource['template:img/buktoken.png']}"/>
+													
+														<p:commandButton styleClass="dropdown-item loginBtn" data-hash-offset="70" value="Wyloguj się" action="#{loginBB.doLogout()}" />
+													</li>
+												</ul>
+												</h:form>
+											</nav>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</header>
+	
+	
+</ui:composition>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/templates/app-page-template.xhtml">
+	<ui:define name="content">
+	
+		<div class="main mainCont">
+			<div class="row justify-content-md-center appHolder">
+			
+				<div class="col-md-7">
+				<h1>Twój portfel</h1>
+				<div class="walletStats">
+					<div class="walletAmount walletStatHolder">
+						<h2>Łączne środki:</h2>
+						<div class="walletStat">
+							<h:outputText id="bukTokens" value="#{sessionScope.uWallet.amount}"/>
+						</div>
+					</div>
+					<div class="walletContribution walletStatHolder">
+						<h2>Łącznie wydałeś:</h2>
+						<div class="walletStat">
+						<h:outputText value="#{sessionScope.uWallet.betContribution}"/>
+						</div>
+					</div>
+					<div class="walletValue walletStatHolder">
+						<h2>Łącznie zyskałeś:</h2>
+						<div class="walletStat">
+						<h:outputText value="#{sessionScope.uWallet.betValue}"/>
+						</div>
+					</div>
+				</div>
+				
+				</div>
+				<div class="col-md-3">
+				<h:form id="XD" method="post">
+				<div class="walletAdd">
+				<h3>Skończyłeś z niczym? Zdarza się..</h3>
+				
+					<h:commandButton action="#{walletBB.freeBukTokens(remoteClient.details.getId(), 100)}" id="noMoneyForYou" value="Doładuj swój portfel!"/>
+					<p:messages for="noMoneyForYou" showDetail="true" autoUpdate="true" showSummary="false"/>
+				</div>
+				</h:form>
+				</div>
+			</div>
+		</div>
+			
+	</ui:define>
+</ui:composition>
+</html>
