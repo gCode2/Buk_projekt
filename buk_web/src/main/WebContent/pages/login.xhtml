@@ -7,41 +7,54 @@
 	xmlns:p="http://primefaces.org/ui">
 <ui:composition template="/templates/login-template.xhtml">
 	<ui:define name="content">
-		<div class="main">
-		<div class="row justify-content-md-center">
+		<div class="main loginCont">
+		<div class="row justify-content-md-center loginHolder">
 								<div class="col-md-9">
 									<div class="featured-box featured-box-primary text-start mt-0">
-										<div class="box-content">
-											<h4 class="color-primary font-weight-semibold text-4 text-uppercase mb-3">I'm a Returning Customer</h4>
-											<h:form action="/" id="frmSignIn" method="post" class="needs-validation" novalidate="novalidate">
+										<div class="box-content loginForm">
+											<h4 class="font-weight-semibold text-4 text-uppercase mb-3" style="color:#07112A">Zaloguj się!</h4>
+											<h:form id="frmSignIn" method="post" class="needs-validation" novalidate="novalidate">
+												
+												
 												<div class="row">
 												
 													<div class="form-group col">
-														<label class="form-label">Username or E-mail Address</label>
+														<label class="form-label">E-mail</label>
 														<br/>
-														<h:inputText id="username" value="#{loginBB.login}" styleClass="form-control form-control-lg" required=""></h:inputText>
-														<h:message for="username"></h:message>
+														
+														<h:inputText id="username" name="username" value="#{loginBB.login}" styleClass="form-control form-control-lg" required="true" requiredMessage="Nie podano loginu!"></h:inputText>
+														<p:messages for="username" showDetail="true" autoUpdate="true" showSummary="false"/>
 													</div>
 												</div>
 												<div class="row">
 													<div class="form-group col">
-														<a class="float-end" href="#">(Lost Password?)</a>
-														<label class="form-label">Password</label>
+														<a class="float-end" href="#">(Zapomniałeś hasła?)</a>
+														<label class="form-label">Hasło</label>
 														<br/>
-														<h:inputSecret id="password" value="#{loginBB.pass}" styleClass="form-control form-control-lg" required=""></h:inputSecret>
-														<h:message for="password"></h:message>
+														<h:inputSecret id="password" name="password" value="#{loginBB.pass}" styleClass="form-control form-control-lg" required="true" requiredMessage="Nie podano hasła!"></h:inputSecret>
+
 													</div>
 												</div>
+												
 												<div class="row">
 													<div class="form-group col-lg-6">
 														
 													</div>
 													<div class="form-group col-lg-6">
-													<h:commandButton action="#{loginBB.doLogin()}" value="Login" styleClass="btn btn-primary btn-modern float-end"></h:commandButton>
-														
+													
+														<p:commandButton update="@form" action="#{loginBB.doLogin()}" value="Login" styleClass="btn btn-modern float-end" style="background-color:#07112A;color:#fff;" />
 													</div>
 												</div>
+												
+												<div id="creationConfirmation"/>
+												<p:messages for="creationConfirmation" showDetail="true" autoUpdate="true" showSummary="false"/>
+												<div id="logoutConfirmation"/>
+												<p:messages for="logoutConfirmation" showDetail="true" autoUpdate="true" showSummary="false"/>
 											</h:form>
+											<h:form>
+												<h:commandLink value="(Nie masz konta? Zarejestruj się!)" action="#{registerBB.registerPage()}" />
+											</h:form>
+											
 										</div>
 									</div>
 								</div>

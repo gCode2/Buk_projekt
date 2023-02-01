@@ -25,9 +25,9 @@
 													<li class="dropdown">
 														<a class="dropdown-item" data-hash-offset="70" href="#about">O projekcie</a>
 													</li>
-													<li class="dropdown" style="margin-left:auto">
+													<li class="dropdown" style="margin-left:auto;display: flex;flex-direction: column;align-content: center;justify-content: center;">
 													<h:form id="goToLogin">
-														<h:commandLink class="dropdown-item" data-hash-offset="70" value="Zaloguj się" action="#{loginDAO.loginPage()}" />
+														<h:commandLink styleClass="dropdown-item loginBtn" data-hash-offset="70" value="Zaloguj się" action="#{loginBB.loginPage()}" />
 														</h:form>
 													</li>
 													

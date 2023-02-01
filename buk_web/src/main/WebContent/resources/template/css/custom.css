@@ -1,1 +1,168 @@
 /* Add here all your CSS customizations */
+.loginCont{
+	display:flex !important;
+	flex-direction: column;
+    justify-content: center;
+}
+.loginHolder{
+	height: calc(90vh - 150px) !important;
+	align-items:center;
+}
+.appHolder{
+	min-height: 100vh !important;
+	padding-top:20px;
+}
+.betWindow{
+	text-align:center !important;
+	position:fixed;
+	width:33.3333333333%;
+}
+.betWindow .betItemList{
+	position:relative;
+	width:100%;
+}
+.registerHolder{
+	height: max-content !important;
+	align-items:center;
+	padding-top:3rem;
+}
+.loginForm, .registerForm{
+	border-top-color: #07112A !important;
+}
+.betForm {
+	display: flex;
+	flex-direction:row;
+	justify-content: space-around;
+}
+.appListsHolder{
+	width:100% !important;
+}
+.loginBtn:hover{
+	background:#143263!important;
+	transition-duration:0.5s;
+	
+}
+.loginBtn{
+	transition-duration:0.5s;
+}
+.matchTable, .betItemTable{
+	width:100%;
+	text-align:center;
+}
+.matchTable th:first-of-type {
+  border-top-left-radius: 8px;
+}
+.matchTable th:last-of-type {
+  border-top-right-radius: 8px;
+}
+.matchTable tr:last-of-type td:first-of-type {
+  border-bottom-left-radius: 8px;
+}
+.matchTable tr:last-of-type td:last-of-type {
+  border-bottom-right-radius: 8px;
+  border-bottom:none !important;
+}
+.matchTable tr {
+	border-bottom:1px solid #aaa;
+}
+.matchTable td, .matchTable th {
+	padding:3px;
+}
+.finished {
+    background-color: #aaa;
+    color:#666;
+}
+.in-progress, .paused{
+	background-color: #fccf79;
+	color: #000;
+}
+.timed {
+	background-color: #cbff94;
+	color: #000;
+}
+/*
+.panel-container div.ui-panel-titlebar {
+ ..
+}
+
+.panel-container div.ui-panel-content {
+ ..
+}
+
+ */
+ 
+.in-progress .ui-panel .ui-panel-titlebar{
+	background-color: #fcec94!important;
+	color: #000 !important;
+}
+ 
+.won .ui-panel .ui-panel-titlebar{
+	background-color: #00ff40 !important;
+	color: #000 !important;
+}
+.lost .ui-panel .ui-panel-titlebar{
+	background-color: #ff5050 !important;
+	color: #000 !important;
+}
+
+.headerRow{
+	background-color: #fff !important;
+	color: #000;
+}
+.not-finished {
+    background-color: red;
+}
+.ui-panel table{
+	width:100%;
+	text-align:center;
+}
+.matchBetListTable{
+	width:100%;
+}
+.matchListHeader{
+	display:flex;
+	padding-right:10px;
+}
+.walletStat{
+	text-align:center;
+	font-size:2rem;
+}
+.walletStatHolder{
+	display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: baseline;
+}
+.btn-holder{
+	text-align:center;
+	margin-bottom:6px;
+}
+.btn-holder input{
+	padding:8px !important;
+	font-size:1.2rem;
+	background: #0d6efd;
+	color:#fff;
+	outline:none;
+	border-radius:5px;
+	transition-duration:0.5s;
+	border: 1px solid #143263;
+}
+.btn-holder input:hover{
+	background: #143263;
+	transition-duration:0.5s;
+}
+.receiveMoneyHolder{
+	text-align:center;
+	padding:3px;
+}
+#appHeaderForm{
+	display: flex;
+    width: 100%;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+#appHeaderForm ul{
+	display: flex;
+    column-gap: 10px;
+}
