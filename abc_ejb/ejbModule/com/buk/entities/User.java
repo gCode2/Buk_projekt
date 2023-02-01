@@ -10,6 +10,7 @@ import java.util.List;
  * 
  */
 @Entity
+@Table(name="user")
 @NamedQuery(name="User.findAll", query="SELECT u FROM User u")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -25,14 +26,12 @@ public class User implements Serializable {
 	private String password;
 
 	private String surname;
+	
+	private String role;
 
 	//bi-directional many-to-one association to Bet
 	@OneToMany(mappedBy="user")
 	private List<Bet> bets;
-
-	//bi-directional many-to-many association to Address
-	@ManyToMany(mappedBy="users")
-	private List<Address> addresses;
 
 	//bi-directional many-to-one association to Wallet
 	@OneToMany(mappedBy="user")
@@ -81,6 +80,14 @@ public class User implements Serializable {
 		this.surname = surname;
 	}
 
+	public String getRole() {
+		return this.role;
+	}
+	
+	public void setRole(String role) {
+		this.role = role;
+	}
+	
 	public List<Bet> getBets() {
 		return this.bets;
 	}
@@ -103,13 +110,6 @@ public class User implements Serializable {
 		return bet;
 	}
 
-	public List<Address> getAddresses() {
-		return this.addresses;
-	}
-
-	public void setAddresses(List<Address> addresses) {
-		this.addresses = addresses;
-	}
 
 	public List<Wallet> getWallets() {
 		return this.wallets;

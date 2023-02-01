@@ -2,6 +2,8 @@ package com.buk.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.ws.rs.ext.ParamConverter.Lazy;
+
 import java.util.List;
 
 
@@ -10,6 +12,7 @@ import java.util.List;
  * 
  */
 @Entity
+@Lazy
 @NamedQuery(name="Bet.findAll", query="SELECT b FROM Bet b")
 public class Bet implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -18,13 +21,17 @@ public class Bet implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	private int contribution;
+	private float contribution;
 
 	private float rate;
 
 	private String status;
 
-	private int value;
+	private float value;
+	
+	private boolean isAvailable;
+	
+	private boolean isReceived;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
@@ -32,6 +39,7 @@ public class Bet implements Serializable {
 	private User user;
 
 	//bi-directional many-to-one association to Betitem
+
 	@OneToMany(mappedBy="bet")
 	private List<Betitem> betitems;
 
@@ -46,11 +54,11 @@ public class Bet implements Serializable {
 		this.id = id;
 	}
 
-	public int getContribution() {
+	public float getContribution() {
 		return this.contribution;
 	}
 
-	public void setContribution(int contribution) {
+	public void setContribution(float contribution) {
 		this.contribution = contribution;
 	}
 
@@ -70,11 +78,11 @@ public class Bet implements Serializable {
 		this.status = status;
 	}
 
-	public int getValue() {
+	public float getValue() {
 		return this.value;
 	}
 
-	public void setValue(int value) {
+	public void setValue(float value) {
 		this.value = value;
 	}
 
@@ -85,13 +93,28 @@ public class Bet implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
 	public List<Betitem> getBetitems() {
 		return this.betitems;
 	}
 
 	public void setBetitems(List<Betitem> betitems) {
 		this.betitems = betitems;
+	}
+	
+	public boolean isAvailable() {
+		return isAvailable;
+	}
+
+	public void setAvailable(boolean isAvailable) {
+		this.isAvailable = isAvailable;
+	}
+
+	public boolean isReceived() {
+		return isReceived;
+	}
+
+	public void setReceived(boolean isReceived) {
+		this.isReceived = isReceived;
 	}
 
 	public Betitem addBetitem(Betitem betitem) {
@@ -107,5 +130,10 @@ public class Bet implements Serializable {
 
 		return betitem;
 	}
+
+	
+
+	
+	
 
 }

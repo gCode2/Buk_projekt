@@ -1,6 +1,8 @@
 package com.buk.entities;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -18,17 +20,27 @@ public class Event implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	private int rate0;
+	private float rate0;
 
-	private int ratea;
+	private float ratea;
 
-	private int rateb;
+	private float rateb;
+	
+	private int scorea;
+	
+	private int scoreb;
 
 	private String result;
+	
+	private String status;
 
-	private int teama;
+	private String teama;
 
-	private int teamb;
+	private String teamb;
+	
+	private LocalDateTime matchDate;
+	
+	private int matchID;
 
 	//bi-directional many-to-one association to Betitem
 	@OneToMany(mappedBy="event")
@@ -45,27 +57,27 @@ public class Event implements Serializable {
 		this.id = id;
 	}
 
-	public int getRate0() {
+	public float getRate0() {
 		return this.rate0;
 	}
 
-	public void setRate0(int rate0) {
+	public void setRate0(float rate0) {
 		this.rate0 = rate0;
 	}
 
-	public int getRatea() {
+	public float getRatea() {
 		return this.ratea;
 	}
 
-	public void setRatea(int ratea) {
+	public void setRatea(float ratea) {
 		this.ratea = ratea;
 	}
 
-	public int getRateb() {
+	public float getRateb() {
 		return this.rateb;
 	}
 
-	public void setRateb(int rateb) {
+	public void setRateb(float rateb) {
 		this.rateb = rateb;
 	}
 
@@ -76,21 +88,47 @@ public class Event implements Serializable {
 	public void setResult(String result) {
 		this.result = result;
 	}
+	
+	public int getScorea() {
+		return this.scorea;
+	}
+	public void setScorea(int scorea) {
+		this.scorea = scorea;
+	}
+	public int getScoreb() {
+		return this.scoreb;
+	}
+	public void setScoreb(int scoreb) {
+		this.scoreb = scoreb;
+	}
 
-	public int getTeama() {
+	public String getTeama() {
 		return this.teama;
 	}
 
-	public void setTeama(int teama) {
+	public void setTeama(String teama) {
 		this.teama = teama;
 	}
 
-	public int getTeamb() {
+	public String getTeamb() {
 		return this.teamb;
 	}
 
-	public void setTeamb(int teamb) {
+	public void setTeamb(String teamb) {
 		this.teamb = teamb;
+	}
+	public LocalDateTime getMatchDate() {
+		return matchDate;
+	}
+	public void setMatchDate(LocalDateTime matchDate) {
+		this.matchDate = matchDate;
+	}
+	
+	public int getMatchID() {
+		return this.matchID;
+	}
+	public void setMatchID(int matchID) {
+		this.matchID = matchID;
 	}
 
 	public List<Betitem> getBetitems() {
@@ -113,6 +151,14 @@ public class Event implements Serializable {
 		betitem.setEvent(null);
 
 		return betitem;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

@@ -5,6 +5,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import com.buk.entities.User;
 
+
+import javax.persistence.Query;
+
 @Stateless
 public class UserDAO {
 	
@@ -12,34 +15,20 @@ public class UserDAO {
 	EntityManager em;
 	
 public User getUserFromDatabase(String login, String pass) {
+	
 		
-		User u = null;
+	User u = null;
+    Query query = em.createQuery("select u from User u where u.email=:login and u.password=:pass");
+    query.setParameter("pass", pass);
+    query.setParameter("login", login);
 
-		if (login.equals("user1") && pass.equals("password")) {
-			u = new User();
-			u.setEmail(login);
-			u.setPassword(pass);
-			u.setName("Jan");
-			u.setSurname("Kowalski");
-		}
-
-		if (login.equals("user2") && pass.equals("password")) {
-			u = new User();
-			u.setEmail(login);
-			u.setPassword(pass);
-			u.setName("Anna");
-			u.setSurname("Nowak");
-		}
-
-		if (login.equals("user3") && pass.equals("password")) {
-			u = new User();
-			u.setEmail(login);
-			u.setPassword(pass);
-			u.setName("Michał");
-			u.setSurname("Jaworek");
-		}
-
-		return u;
+    try{
+        u= (User) query.getSingleResult();
+        return u;
+    }catch (Exception e){
+    	
+        return null;
+    }
 	}
 	
 	public void insert(User user) {
@@ -54,4 +43,17 @@ public User getUserFromDatabase(String login, String pass) {
 	public User get(Object id) {
 		return em.find(User.class, id);
 	}
+	
+	public boolean checkLogin(String login){
+        Query query = em.createQuery("select u from User u where email=:login");
+        query.setParameter("login",login);
+
+        try {
+            query.getSingleResult();
+            return false;
+        }catch (Exception e){
+            return true;
+        }
+    }
+	
 }

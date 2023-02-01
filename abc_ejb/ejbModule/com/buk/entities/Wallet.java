@@ -17,11 +17,11 @@ public class Wallet implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
-	private int amount;
+	private float amount;
 
-	private int betContribution;
+	private float betContribution;
 
-	private int betValue;
+	private float betValue;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
@@ -39,27 +39,27 @@ public class Wallet implements Serializable {
 		this.id = id;
 	}
 
-	public int getAmount() {
+	public float getAmount() {
 		return this.amount;
 	}
 
-	public void setAmount(int amount) {
-		this.amount = amount;
+	public void setAmount(float newAmount) {
+		this.amount = newAmount;
 	}
 
-	public int getBetContribution() {
+	public float getBetContribution() {
 		return this.betContribution;
 	}
 
-	public void setBetContribution(int betContribution) {
-		this.betContribution = betContribution;
+	public void setBetContribution(float newContribution) {
+		this.betContribution = newContribution;
 	}
 
-	public int getBetValue() {
+	public float getBetValue() {
 		return this.betValue;
 	}
 
-	public void setBetValue(int betValue) {
+	public void setBetValue(float betValue) {
 		this.betValue = betValue;
 	}
 
